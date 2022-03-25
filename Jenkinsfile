@@ -2,7 +2,10 @@
 
 pipeline {
     agent 'master'
-    parameters {
+    stage('Setup parameters') {
+            steps {
+                script {
+                     parameters {
         string(name: 'projectname', defaultValue: 'bre', description: 'projectname' )
         // choice(name: 'GOAL', choices: ['package', 'clean package', 'install'], description: 'maven goals')
         string (name: 'destGit', defaultValue: 'reponame', description: 'reponame', trim: true)
@@ -12,6 +15,8 @@ pipeline {
         string (name: 'destGit', defaultValue: 'destGit', description: 'destGit', trim: true)
         // booleanParam name: 'test', description: 'true'
         }
+     }
+  }             
     stages{
         stage('create multibranch'){
             steps{
